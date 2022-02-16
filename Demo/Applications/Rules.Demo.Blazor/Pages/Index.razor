@@ -1,0 +1,44 @@
+﻿@page "/index"
+@inject Application _application;
+
+<PageTitle>Rule Engine Blazor Demo</PageTitle>
+
+<h1>Rule Engine Blazor Demo</h1>
+
+@if(_application.IsLoggedIn)
+{
+    <h2>Welcome @_application.UserModel.Username!</h2>
+    @if(_application.IsEligibleForPromotion)
+    {
+        <div>
+		<div>You can see our Promotions:</div>
+            <ul>
+                <li>There is an extra jackpot in Bingo!</li>
+                <li>There are extra turns in Spin!</li>
+            </ul>
+            @if(_application.IsEligibleForBonus)
+            {
+                @if(_application.IsBonusClaimed)
+                {
+                    <div class="alert alert-success">You have been awarded our special Bonus!</div>
+                }
+                else
+                {
+                    <div class="alert alert-info">You can also get our special Bonus! Do you want to claim it?</div>
+                    <br/>
+                    <div>
+                        <button type="button" class="btn btn-primary" @onclick="_application.Claim">Claim Bonus</button>
+                    </div>
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">You can't see our Promotions, sorry!</div>
+    }
+    <br/>
+    <div>
+        <button type="button" class="btn btn-danger" @onclick="_application.Logout">Logout</button>
+    </div>
+}
