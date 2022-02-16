@@ -1,0 +1,35 @@
+﻿@page "/"
+@inject Application _application;
+
+<div class="card">
+    <h4 class="card-header">Login</h4>
+    <div class="card-body">
+        <EditForm Model="@_application.LoginModel" OnValidSubmit="_application.LoginAsync">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Username</label>
+                <InputText @bind-Value="_application.LoginModel.Username" class="form-control" />
+                <ValidationMessage For="@(() => _application.LoginModel.Username)" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <InputText @bind-Value="_application.LoginModel.Password" name="password" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Rules</label>
+                <InputSelect class="form-control" @bind-Value="_application.LoginModel.RuleEngineType">
+                    @foreach (var rule in Enum.GetValues(typeof(RuleEngineType)))
+                    {
+                        <option value="@rule">@rule</option>
+                    }
+                </InputSelect>
+            </div>
+            <br/>
+            <div>
+                <button class="btn btn-primary">
+                    Login
+                </button>
+            </div>
+        </EditForm>
+    </div>
+</div>

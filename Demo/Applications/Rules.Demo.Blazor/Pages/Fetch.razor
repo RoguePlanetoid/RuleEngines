@@ -1,0 +1,40 @@
+﻿@page "/fetch"
+@inject Application _application;
+
+<PageTitle>Rule Engine Blazor Demo</PageTitle>
+
+<h1>Users</h1>
+
+@if (!_application.UserModels.Any())
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Date Of Birth</th>
+                <th>Registered Date</th>
+                <th>Is Verified</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in _application.UserModels)
+            {
+            <tr>
+                <td>@user.Username</td>
+                <td>@user.DateOfBirth.ToShortDateString()</td>
+                <td>@user.RegisteredDate.ToShortDateString()</td>
+                <td>@user.IsIdentityVerified</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    protected override Task OnInitializedAsync() =>
+        _application.FetchAsync();
+}
