@@ -17,5 +17,3 @@ https://dot.net
 https://github.com/elsa-workflows
 
 https://github.com/Microsoft/RulesEngine
-
-https://github.com/RoguePlanetoid/RuleEngine
